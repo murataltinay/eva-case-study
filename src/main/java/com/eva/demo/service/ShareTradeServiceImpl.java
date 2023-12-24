@@ -103,6 +103,7 @@ public class ShareTradeServiceImpl implements ShareTradeService {
                 buyShare(user, userPortfolio, shareTrade, shareTrade.getQuantity());
             } else {
                 buyShare(user, userPortfolio, shareTrade, quantityToBeReceivedFromLastShare);
+                break;
             }
         }
 
