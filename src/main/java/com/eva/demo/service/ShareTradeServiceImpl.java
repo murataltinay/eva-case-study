@@ -54,11 +54,12 @@ public class ShareTradeServiceImpl implements ShareTradeService {
             throw new BusinessException(ReasonType.SELL_TRADE_NOT_FOUND);
         }
         ShareTrade shareTrade = optionalShareTrade.get();
-        long differenceHours = ChronoUnit.HOURS.between(OffsetDateTime.now(), shareTrade.getTransactionDate());
+        long differenceHours = ChronoUnit.HOURS.between(shareTrade.getTransactionDate(), OffsetDateTime.now());
         if (differenceHours < 1) {
             throw new BusinessException(ReasonType.ONE_HOUR_LIMIT);
         }
         shareTrade.setOneLotPrice(updatePriceRequest.getNewPrice());
+        shareTrade.setTransactionDate(OffsetDateTime.now());
         shareTradeRepository.save(shareTrade);
     }
 
